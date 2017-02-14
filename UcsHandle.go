@@ -12,10 +12,10 @@ import (
 )
 
 // debugPOST Trigger Debug messages for POST
-const debugPOST = true
+const debugPOST = false
 
 // debugXML Trigger Debug messages for XML structs
-const debugXML = true
+const debugXML = false
 
 // UcsHandle UCS Handler Struct
 type UcsHandle struct {
@@ -119,89 +119,6 @@ func (u *UcsHandle) ResolveClass(class string) {
 		fmt.Printf("%+v\n", r)
 	}
 }
-
-// <aaaLogin cookie="" response="yes" outCookie="1485838848/75d77788-475d-175d-8002-eebc39fc1d88" outRefreshPeriod="600" outPriv="admin" outSessionId="6" outVersion="2.0(9l)"> </aaaLogin>
-// <aaaLogin cookie="" response="yes" errorCode="551" invocationResult="unidentified-fail" errorDescr="Authentication failed"> </aaaLogin>
-/*
-type aaaLogin struct {
-	XMLName          xml.Name `xml:"aaaLogin"`
-	InName           string   `xml:"inName,attr,omitempty"`
-	InPassword       string   `xml:"inPassword,attr,omitempty"`
-	Cookie           string   `xml:"cookie,attr,omitempty"`
-	Response         string   `xml:"response,attr,omitempty"`
-	OutCookie        string   `xml:"outCookie,attr,omitempty"`
-	OutRefreshPeriod string   `xml:"outRefreshPeriod,attr,omitempty"`
-	OutPriv          string   `xml:"outPriv,attr,omitempty"`
-	OutSessionID     int      `xml:"outSessionId,attr,omitempty"`
-	OutVersion       string   `xml:"outVersion,attr,omitempty"`
-	ErrorCode        int      `xml:"errorCode,attr,omitempty"`
-	InvocationResult string   `xml:"invocationResult,attr,omitempty"`
-	ErrorDescr       string   `xml:"errorDescr,attr,omitempty"`
-}
-*/
-
-// <aaaLogout cookie="" response="yes" outStatus="success"> </aaaLogout>
-// <aaaLogout cookie="" response="yes" errorCode="555" invocationResult="unidentified-fail" errorDescr="Session not found"> </aaaLogout>
-/*
-type aaaLogout struct {
-	XMLName          xml.Name `xml:"aaaLogout"`
-	InCookie         string   `xml:"inCookie,attr,omitempty"`
-	Cookie           string   `xml:"cookie,attr,omitempty"`
-	Response         string   `xml:"response,attr,omitempty"`
-	ErrorCode        int      `xml:"errorCode,attr,omitempty"`
-	InvocationResult string   `xml:"invocationResult,attr,omitempty"`
-	ErrorDescr       string   `xml:"errorDescr,attr,omitempty"`
-	OutStatus        string   `xml:"outStatus,attr,omitempty"`
-}
-*/
-
-// <aaaRefresh cookie="" response="yes" outCookie="1485969023/43f92d8e-477b-177b-8005-b523c4067ff0" outRefreshPeriod="600" outPriv="admin" outSessionId="6" outVersion="2.0(13i)"> </aaaRefresh>
-// <error cookie="" response="yes" errorCode="ERR-xml-parse-error" invocationResult="594" errorDescr="XML PARSING ERROR: Required inCookie attribute missing in the xml request. " />
-/*
-type aaaRefresh struct {
-	XMLName          xml.Name `xml:"aaaRefresh"`
-	InName           string   `xml:"inName,attr,omitempty"`
-	InPassword       string   `xml:"inPassword,attr,omitempty"`
-	InCookie         string   `xml:"inCookie,attr,omitempty"`
-	Cookie           string   `xml:"cookie,attr,omitempty"`
-	Response         string   `xml:"response,attr,omitempty"`
-	OutCookie        string   `xml:"outCookie,attr,omitempty"`
-	OutRefreshPeriod string   `xml:"outRefreshPeriod,attr,omitempty"`
-	OutPriv          string   `xml:"outPriv,attr,omitempty"`
-	OutSessionID     int      `xml:"outSessionId,attr,omitempty"`
-	OutVersion       string   `xml:"outVersion,attr,omitempty"`
-	ErrorCode        int      `xml:"errorCode,attr,omitempty"`
-	InvocationResult string   `xml:"invocationResult,attr,omitempty"`
-	ErrorDescr       string   `xml:"errorDescr,attr,omitempty"`
-}
-*/
-
-type outConfigs struct {
-	XMLName    xml.Name      `xml:"outConfigs"`
-	OutConfigs []interface{} `xml:"outConfigs"`
-}
-
-/*
-type configConfMo struct {
-	XMLName        xml.Name    `xml:"configConfMo"`
-	Cookie         string      `xml:"cookie,attr"`
-	Dn             string      `xml:"dn,attr,omitempty"`
-	InHierarchical string      `xml:"inHierarchical,attr,omitempty"`
-	InConfig       interface{} `xml:"inConfig>InConfig,omitempty"`
-	OutConfig      interface{} `xml:"inConfig>OutConfig,omitempty"`
-}
-*/
-
-// <configResolveClass cookie="1313086522/c7c08988-aa3e-1a3e-8005-5e61c2e14388" inHierarchical="false" classId="firmwareRunning"/>
-/*
-type configResolveClass struct {
-	XMLName        xml.Name `xml:"configResolveClass"`
-	Cookie         string   `xml:"cookie,attr"`
-	ClassID        string   `xml:"classId,attr,omitempty"`
-	InHierarchical string   `xml:"inHierarchical,attr,omitempty"`
-	OutConfigs     *outConfigs
-}
-*/
 
 func post(url string, xmlStruct interface{}) []byte {
 	tr := &http.Transport{
