@@ -9,6 +9,8 @@ import (
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/davecgh/go-spew/spew"
 )
 
 // debugPOST Trigger Debug messages for POST
@@ -36,7 +38,8 @@ func (u *UcsHandle) Login() uint {
 	var r aaaLogin
 	xml.Unmarshal(body, &r)
 	if debugXML {
-		fmt.Printf("%+v\n", r)
+		fmt.Printf("aaaLogin\n")
+		spew.Dump(r)
 	}
 
 	u.cookie = r.OutCookie
@@ -56,7 +59,7 @@ func (u *UcsHandle) Refresh() uint {
 	var r aaaRefresh
 	xml.Unmarshal(body, &r)
 	if debugXML {
-		fmt.Printf("%+v\n", r)
+		spew.Dump(r)
 	}
 
 	u.cookie = r.OutCookie
@@ -75,7 +78,7 @@ func (u *UcsHandle) Logout() uint {
 	xml.Unmarshal(body, &r)
 
 	if debugXML {
-		fmt.Printf("%+v\n", r)
+		spew.Dump(r)
 	}
 
 	u.cookie = ""
@@ -91,18 +94,30 @@ func (u *UcsHandle) ConfMo(mo managedObject) {
 
 	if debugXML {
 		xmlStr, xmlErr := xml.Marshal(confMo)
-		fmt.Printf("%+v\n", xmlErr)
-		fmt.Printf("%s\n", xmlStr)
+		spew.Dump(xmlStr, xmlErr)
 	}
 
 	post(u.URL, confMo)
 }
 
+// UCSObject convert a managedObject to a hiearchy of typed UCS objects
+// func (u *UcsHandle) UCSObject(obj managedObject) interface{} {
+// 	for _, element := range r.OutConfigs {
+// 		e := element.(FaultInst)
+//
+// 	}
+//
+// 	return obj
+// }
+
 // ResolveClass Search by Class
-func (u *UcsHandle) ResolveClass(class string) {
-	var resolveClass configResolveClass
+func (u *UcsHandle) ResolveClass(class string, hierarchical string) ConfigResolveClass {
+	var resolveClass ConfigResolveClass
 	resolveClass.Cookie = u.cookie
 	resolveClass.ClassID = class
+	// Not handling the xs:choice field in XML, this may be causing the issue
+	// TODO manage hierarchical objects in xsd
+	resolveClass.InHierarchical = hierarchical
 
 	if debugXML {
 		xmlStr, xmlErr := xml.Marshal(resolveClass)
@@ -112,12 +127,14 @@ func (u *UcsHandle) ResolveClass(class string) {
 
 	body := post(u.URL, resolveClass)
 
-	var r configResolveClass
+	var r ConfigResolveClass
 	xml.Unmarshal(body, &r)
 
 	if debugXML {
-		fmt.Printf("%+v\n", r)
+		spew.Dump(r)
 	}
+
+	return r
 }
 
 func post(url string, xmlStruct interface{}) []byte {
@@ -127,7 +144,9 @@ func post(url string, xmlStruct interface{}) []byte {
 	var client = &http.Client{Transport: tr}
 
 	xmlStr, xmlErr := xml.Marshal(xmlStruct)
-	fmt.Printf("%+v\n", xmlErr)
+	if debugXML {
+		fmt.Printf("%+v\n", xmlErr)
+	}
 
 	resp, err := client.Post(url, "application/x-www-form-urlencoded", strings.NewReader(string(xmlStr)))
 	if err != nil {
@@ -137,7 +156,9 @@ func post(url string, xmlStruct interface{}) []byte {
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
-	fmt.Printf("%+v\n", err)
+	if err != nil {
+		fmt.Printf("%+v\n", err)
+	}
 
 	t := time.Now()
 	if debugPOST {

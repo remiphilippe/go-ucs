@@ -347,7 +347,7 @@ func (s *configResolveChildren) UnmarshalXML(d *xml.Decoder, start xml.StartElem
 				m = new(biosVfWorkLoadConfig)
 
 			case "huuFirmwareUpdater":
-				m = new(huuFirmwareUpdater)
+				m = new(HuuFirmwareUpdater)
 
 			case "huuFirmwareRunning":
 				m = new(huuFirmwareRunning)
@@ -389,7 +389,7 @@ func (s *configResolveChildren) UnmarshalXML(d *xml.Decoder, start xml.StartElem
 				m = new(biosVfLvDIMMSupport)
 
 			case "firmwareRunning":
-				m = new(firmwareRunning)
+				m = new(FirmwareRunning)
 
 			case "biosVfCDNEnable":
 				m = new(biosVfCDNEnable)
@@ -401,7 +401,7 @@ func (s *configResolveChildren) UnmarshalXML(d *xml.Decoder, start xml.StartElem
 				m = new(biosVfIntelHyperThreadingTech)
 
 			case "computeRackUnit":
-				m = new(computeRackUnit)
+				m = new(ComputeRackUnit)
 
 			case "biosVfProcessorC3Report":
 				m = new(biosVfProcessorC3Report)
@@ -467,7 +467,7 @@ func (s *configResolveChildren) UnmarshalXML(d *xml.Decoder, start xml.StartElem
 				m = new(biosVfAltitude)
 
 			case "mgmtIf":
-				m = new(mgmtIf)
+				m = new(MgmtIf)
 
 			case "oneTimeBootDevice":
 				m = new(oneTimeBootDevice)
@@ -476,7 +476,7 @@ func (s *configResolveChildren) UnmarshalXML(d *xml.Decoder, start xml.StartElem
 				m = new(commIPmiLan)
 
 			case "networkAdapterUnit":
-				m = new(networkAdapterUnit)
+				m = new(NetworkAdapterUnit)
 
 			case "biosVfQPIConfig":
 				m = new(biosVfQPIConfig)
@@ -515,7 +515,7 @@ func (s *configResolveChildren) UnmarshalXML(d *xml.Decoder, start xml.StartElem
 				m = new(platformEventFilters)
 
 			case "adaptorHostEthIf":
-				m = new(adaptorHostEthIf)
+				m = new(AdaptorHostEthIf)
 
 			case "biosVfAssertNMIOnSERR":
 				m = new(biosVfAssertNMIOnSERR)
@@ -524,7 +524,7 @@ func (s *configResolveChildren) UnmarshalXML(d *xml.Decoder, start xml.StartElem
 				m = new(biosVfIntelVTForDirectedIO)
 
 			case "faultInst":
-				m = new(faultInst)
+				m = new(FaultInst)
 
 			case "systemIOController":
 				m = new(systemIOController)
@@ -632,7 +632,7 @@ func (s *configResolveChildren) UnmarshalXML(d *xml.Decoder, start xml.StartElem
 				m = new(topRoot)
 
 			case "networkAdapterEthIf":
-				m = new(networkAdapterEthIf)
+				m = new(NetworkAdapterEthIf)
 
 			case "osiStart":
 				m = new(osiStart)
@@ -953,11 +953,11 @@ func (s *configResolveChildren) UnmarshalXML(d *xml.Decoder, start xml.StartElem
 			}
 		}
 	}
-	return nil
+	//return nil
 }
 
 // configResolveClass is generated from an XSD element
-type configResolveClass struct {
+type ConfigResolveClass struct {
 	XMLName          xml.Name        `xml:"configResolveClass"`
 	InHierarchical   string          `xml:"inHierarchical,attr,omitempty"`
 	Cookie           string          `xml:"cookie,attr"`
@@ -969,13 +969,17 @@ type configResolveClass struct {
 	OutConfigs       []managedObject `xml:"outConfigs"`
 }
 
-func (s *configResolveClass) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+func (s *ConfigResolveClass) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 	s.XMLName = start.Name
 	for {
 		t, err := d.Token()
 		if err != nil {
 			return err
 		}
+
+		//fmt.Printf("TOKEN\n")
+		//spew.Dump(t)
+
 		var m managedObject
 		switch tt := t.(type) {
 		case xml.StartElement:
@@ -1204,7 +1208,7 @@ func (s *configResolveClass) UnmarshalXML(d *xml.Decoder, start xml.StartElement
 				m = new(biosVfWorkLoadConfig)
 
 			case "huuFirmwareUpdater":
-				m = new(huuFirmwareUpdater)
+				m = new(HuuFirmwareUpdater)
 
 			case "biosVfAutonumousCstateEnable":
 				m = new(biosVfAutonumousCstateEnable)
@@ -1246,7 +1250,7 @@ func (s *configResolveClass) UnmarshalXML(d *xml.Decoder, start xml.StartElement
 				m = new(biosVfLvDIMMSupport)
 
 			case "firmwareRunning":
-				m = new(firmwareRunning)
+				m = new(FirmwareRunning)
 
 			case "biosVfCDNEnable":
 				m = new(biosVfCDNEnable)
@@ -1258,7 +1262,7 @@ func (s *configResolveClass) UnmarshalXML(d *xml.Decoder, start xml.StartElement
 				m = new(biosVfIntelHyperThreadingTech)
 
 			case "computeRackUnit":
-				m = new(computeRackUnit)
+				m = new(ComputeRackUnit)
 
 			case "biosVfProcessorC3Report":
 				m = new(biosVfProcessorC3Report)
@@ -1324,7 +1328,7 @@ func (s *configResolveClass) UnmarshalXML(d *xml.Decoder, start xml.StartElement
 				m = new(biosVfAltitude)
 
 			case "mgmtIf":
-				m = new(mgmtIf)
+				m = new(MgmtIf)
 
 			case "iodController":
 				m = new(iodController)
@@ -1339,7 +1343,7 @@ func (s *configResolveClass) UnmarshalXML(d *xml.Decoder, start xml.StartElement
 				m = new(commIPmiLan)
 
 			case "networkAdapterUnit":
-				m = new(networkAdapterUnit)
+				m = new(NetworkAdapterUnit)
 
 			case "biosVfQPIConfig":
 				m = new(biosVfQPIConfig)
@@ -1360,7 +1364,7 @@ func (s *configResolveClass) UnmarshalXML(d *xml.Decoder, start xml.StartElement
 				m = new(platformEventFilters)
 
 			case "adaptorHostEthIf":
-				m = new(adaptorHostEthIf)
+				m = new(AdaptorHostEthIf)
 
 			case "certificateManagement":
 				m = new(certificateManagement)
@@ -1381,7 +1385,7 @@ func (s *configResolveClass) UnmarshalXML(d *xml.Decoder, start xml.StartElement
 				m = new(biosVfIntelVTForDirectedIO)
 
 			case "faultInst":
-				m = new(faultInst)
+				m = new(FaultInst)
 
 			case "systemIOController":
 				m = new(systemIOController)
@@ -1492,7 +1496,7 @@ func (s *configResolveClass) UnmarshalXML(d *xml.Decoder, start xml.StartElement
 				m = new(topRoot)
 
 			case "networkAdapterEthIf":
-				m = new(networkAdapterEthIf)
+				m = new(NetworkAdapterEthIf)
 
 			case "osiStart":
 				m = new(osiStart)
@@ -1819,7 +1823,7 @@ func (s *configResolveClass) UnmarshalXML(d *xml.Decoder, start xml.StartElement
 			}
 		}
 	}
-	return nil
+	//return nil
 }
 
 // configResolveDn is generated from an XSD element
@@ -1896,7 +1900,7 @@ func (s *configResolveDn) UnmarshalXML(d *xml.Decoder, start xml.StartElement) e
 				m = new(topRoot)
 
 			case "networkAdapterEthIf":
-				m = new(networkAdapterEthIf)
+				m = new(NetworkAdapterEthIf)
 
 			case "biosVfPwrPerfTuning":
 				m = new(biosVfPwrPerfTuning)
@@ -2418,7 +2422,7 @@ func (s *configResolveDn) UnmarshalXML(d *xml.Decoder, start xml.StartElement) e
 				m = new(commNtpProvider)
 
 			case "huuFirmwareUpdater":
-				m = new(huuFirmwareUpdater)
+				m = new(HuuFirmwareUpdater)
 
 			case "biosVfConsoleRedirection":
 				m = new(biosVfConsoleRedirection)
@@ -2472,7 +2476,7 @@ func (s *configResolveDn) UnmarshalXML(d *xml.Decoder, start xml.StartElement) e
 				m = new(biosVfLvDIMMSupport)
 
 			case "firmwareRunning":
-				m = new(firmwareRunning)
+				m = new(FirmwareRunning)
 
 			case "biosProfileManagement":
 				m = new(biosProfileManagement)
@@ -2481,7 +2485,7 @@ func (s *configResolveDn) UnmarshalXML(d *xml.Decoder, start xml.StartElement) e
 				m = new(biosVfIntelHyperThreadingTech)
 
 			case "computeRackUnit":
-				m = new(computeRackUnit)
+				m = new(ComputeRackUnit)
 
 			case "adaptorIpV4RssHashProfile":
 				m = new(adaptorIPV4RssHashProfile)
@@ -2547,7 +2551,7 @@ func (s *configResolveDn) UnmarshalXML(d *xml.Decoder, start xml.StartElement) e
 				m = new(biosVfAltitude)
 
 			case "mgmtIf":
-				m = new(mgmtIf)
+				m = new(MgmtIf)
 
 			case "biosVfQPIConfig":
 				m = new(biosVfQPIConfig)
@@ -2565,7 +2569,7 @@ func (s *configResolveDn) UnmarshalXML(d *xml.Decoder, start xml.StartElement) e
 				m = new(commIPmiLan)
 
 			case "networkAdapterUnit":
-				m = new(networkAdapterUnit)
+				m = new(NetworkAdapterUnit)
 
 			case "biosVfSataModeSelect":
 				m = new(biosVfSataModeSelect)
@@ -2586,7 +2590,7 @@ func (s *configResolveDn) UnmarshalXML(d *xml.Decoder, start xml.StartElement) e
 				m = new(platformEventFilters)
 
 			case "adaptorHostEthIf":
-				m = new(adaptorHostEthIf)
+				m = new(AdaptorHostEthIf)
 
 			case "certificateManagement":
 				m = new(certificateManagement)
@@ -2607,7 +2611,7 @@ func (s *configResolveDn) UnmarshalXML(d *xml.Decoder, start xml.StartElement) e
 				m = new(biosVfIntelVTForDirectedIO)
 
 			case "faultInst":
-				m = new(faultInst)
+				m = new(FaultInst)
 
 			case "biosVfCkeLowPolicy":
 				m = new(biosVfCkeLowPolicy)
@@ -2685,7 +2689,7 @@ func (s *configResolveDn) UnmarshalXML(d *xml.Decoder, start xml.StartElement) e
 			}
 		}
 	}
-	return nil
+	//return nil
 }
 
 // configResolveParent is generated from an XSD element
@@ -2780,7 +2784,7 @@ func (s *configResolveParent) UnmarshalXML(d *xml.Decoder, start xml.StartElemen
 				m = new(biosVfWorkLoadConfig)
 
 			case "huuFirmwareUpdater":
-				m = new(huuFirmwareUpdater)
+				m = new(HuuFirmwareUpdater)
 
 			case "aaaSession":
 				m = new(aaaSession)
@@ -2822,7 +2826,7 @@ func (s *configResolveParent) UnmarshalXML(d *xml.Decoder, start xml.StartElemen
 				m = new(biosVfLvDIMMSupport)
 
 			case "firmwareRunning":
-				m = new(firmwareRunning)
+				m = new(FirmwareRunning)
 
 			case "biosVfCDNEnable":
 				m = new(biosVfCDNEnable)
@@ -2834,7 +2838,7 @@ func (s *configResolveParent) UnmarshalXML(d *xml.Decoder, start xml.StartElemen
 				m = new(biosVfIntelHyperThreadingTech)
 
 			case "computeRackUnit":
-				m = new(computeRackUnit)
+				m = new(ComputeRackUnit)
 
 			case "biosVfProcessorC3Report":
 				m = new(biosVfProcessorC3Report)
@@ -2900,7 +2904,7 @@ func (s *configResolveParent) UnmarshalXML(d *xml.Decoder, start xml.StartElemen
 				m = new(biosVfAltitude)
 
 			case "mgmtIf":
-				m = new(mgmtIf)
+				m = new(MgmtIf)
 
 			case "oneTimeBootDevice":
 				m = new(oneTimeBootDevice)
@@ -2909,7 +2913,7 @@ func (s *configResolveParent) UnmarshalXML(d *xml.Decoder, start xml.StartElemen
 				m = new(commIPmiLan)
 
 			case "networkAdapterUnit":
-				m = new(networkAdapterUnit)
+				m = new(NetworkAdapterUnit)
 
 			case "biosVfQPIConfig":
 				m = new(biosVfQPIConfig)
@@ -2948,7 +2952,7 @@ func (s *configResolveParent) UnmarshalXML(d *xml.Decoder, start xml.StartElemen
 				m = new(platformEventFilters)
 
 			case "adaptorHostEthIf":
-				m = new(adaptorHostEthIf)
+				m = new(AdaptorHostEthIf)
 
 			case "biosVfAssertNMIOnSERR":
 				m = new(biosVfAssertNMIOnSERR)
@@ -2957,7 +2961,7 @@ func (s *configResolveParent) UnmarshalXML(d *xml.Decoder, start xml.StartElemen
 				m = new(biosVfIntelVTForDirectedIO)
 
 			case "faultInst":
-				m = new(faultInst)
+				m = new(FaultInst)
 
 			case "systemIOController":
 				m = new(systemIOController)
@@ -3065,7 +3069,7 @@ func (s *configResolveParent) UnmarshalXML(d *xml.Decoder, start xml.StartElemen
 				m = new(topRoot)
 
 			case "networkAdapterEthIf":
-				m = new(networkAdapterEthIf)
+				m = new(NetworkAdapterEthIf)
 
 			case "osiStart":
 				m = new(osiStart)
@@ -3551,7 +3555,7 @@ func (s *configResolveParent) UnmarshalXML(d *xml.Decoder, start xml.StartElemen
 			}
 		}
 	}
-	return nil
+	//return nil
 }
 
 // configConfMo is generated from an XSD element
@@ -3827,7 +3831,7 @@ func (s *configConfMo) UnmarshalXML(d *xml.Decoder, start xml.StartElement) erro
 				m = new(commNtpProvider)
 
 			case "huuFirmwareUpdater":
-				m = new(huuFirmwareUpdater)
+				m = new(HuuFirmwareUpdater)
 
 			case "biosVfConsoleRedirection":
 				m = new(biosVfConsoleRedirection)
@@ -3881,7 +3885,7 @@ func (s *configConfMo) UnmarshalXML(d *xml.Decoder, start xml.StartElement) erro
 				m = new(biosVfLvDIMMSupport)
 
 			case "firmwareRunning":
-				m = new(firmwareRunning)
+				m = new(FirmwareRunning)
 
 			case "biosProfileManagement":
 				m = new(biosProfileManagement)
@@ -3890,7 +3894,7 @@ func (s *configConfMo) UnmarshalXML(d *xml.Decoder, start xml.StartElement) erro
 				m = new(biosVfIntelHyperThreadingTech)
 
 			case "computeRackUnit":
-				m = new(computeRackUnit)
+				m = new(ComputeRackUnit)
 
 			case "adaptorIpV4RssHashProfile":
 				m = new(adaptorIPV4RssHashProfile)
@@ -3956,7 +3960,7 @@ func (s *configConfMo) UnmarshalXML(d *xml.Decoder, start xml.StartElement) erro
 				m = new(biosVfAltitude)
 
 			case "mgmtIf":
-				m = new(mgmtIf)
+				m = new(MgmtIf)
 
 			case "biosVfQPIConfig":
 				m = new(biosVfQPIConfig)
@@ -3974,7 +3978,7 @@ func (s *configConfMo) UnmarshalXML(d *xml.Decoder, start xml.StartElement) erro
 				m = new(commIPmiLan)
 
 			case "networkAdapterUnit":
-				m = new(networkAdapterUnit)
+				m = new(NetworkAdapterUnit)
 
 			case "biosVfSataModeSelect":
 				m = new(biosVfSataModeSelect)
@@ -3995,7 +3999,7 @@ func (s *configConfMo) UnmarshalXML(d *xml.Decoder, start xml.StartElement) erro
 				m = new(platformEventFilters)
 
 			case "adaptorHostEthIf":
-				m = new(adaptorHostEthIf)
+				m = new(AdaptorHostEthIf)
 
 			case "certificateManagement":
 				m = new(certificateManagement)
@@ -4016,7 +4020,7 @@ func (s *configConfMo) UnmarshalXML(d *xml.Decoder, start xml.StartElement) erro
 				m = new(biosVfIntelVTForDirectedIO)
 
 			case "faultInst":
-				m = new(faultInst)
+				m = new(FaultInst)
 
 			case "biosVfCkeLowPolicy":
 				m = new(biosVfCkeLowPolicy)
@@ -4127,7 +4131,7 @@ func (s *configConfMo) UnmarshalXML(d *xml.Decoder, start xml.StartElement) erro
 				m = new(topRoot)
 
 			case "networkAdapterEthIf":
-				m = new(networkAdapterEthIf)
+				m = new(NetworkAdapterEthIf)
 
 			case "biosVfPwrPerfTuning":
 				m = new(biosVfPwrPerfTuning)
@@ -4418,7 +4422,7 @@ func (s *configConfMo) UnmarshalXML(d *xml.Decoder, start xml.StartElement) erro
 			}
 		}
 	}
-	return nil
+	//return nil
 }
 
 // configConfMos is generated from an XSD element
@@ -4450,7 +4454,7 @@ func (s *configConfMos) UnmarshalXML(d *xml.Decoder, start xml.StartElement) err
 				m = new(biosVfAltitude)
 
 			case "mgmtIf":
-				m = new(mgmtIf)
+				m = new(MgmtIf)
 
 			case "oneTimeBootDevice":
 				m = new(oneTimeBootDevice)
@@ -4459,7 +4463,7 @@ func (s *configConfMos) UnmarshalXML(d *xml.Decoder, start xml.StartElement) err
 				m = new(commIPmiLan)
 
 			case "networkAdapterUnit":
-				m = new(networkAdapterUnit)
+				m = new(NetworkAdapterUnit)
 
 			case "biosVfQPIConfig":
 				m = new(biosVfQPIConfig)
@@ -4498,7 +4502,7 @@ func (s *configConfMos) UnmarshalXML(d *xml.Decoder, start xml.StartElement) err
 				m = new(platformEventFilters)
 
 			case "adaptorHostEthIf":
-				m = new(adaptorHostEthIf)
+				m = new(AdaptorHostEthIf)
 
 			case "biosVfAssertNMIOnSERR":
 				m = new(biosVfAssertNMIOnSERR)
@@ -4507,7 +4511,7 @@ func (s *configConfMos) UnmarshalXML(d *xml.Decoder, start xml.StartElement) err
 				m = new(biosVfIntelVTForDirectedIO)
 
 			case "faultInst":
-				m = new(faultInst)
+				m = new(FaultInst)
 
 			case "systemIOController":
 				m = new(systemIOController)
@@ -4615,7 +4619,7 @@ func (s *configConfMos) UnmarshalXML(d *xml.Decoder, start xml.StartElement) err
 				m = new(topRoot)
 
 			case "networkAdapterEthIf":
-				m = new(networkAdapterEthIf)
+				m = new(NetworkAdapterEthIf)
 
 			case "osiStart":
 				m = new(osiStart)
@@ -5152,7 +5156,7 @@ func (s *configConfMos) UnmarshalXML(d *xml.Decoder, start xml.StartElement) err
 				m = new(biosVfWorkLoadConfig)
 
 			case "huuFirmwareUpdater":
-				m = new(huuFirmwareUpdater)
+				m = new(HuuFirmwareUpdater)
 
 			case "huuFirmwareRunning":
 				m = new(huuFirmwareRunning)
@@ -5194,7 +5198,7 @@ func (s *configConfMos) UnmarshalXML(d *xml.Decoder, start xml.StartElement) err
 				m = new(biosVfLvDIMMSupport)
 
 			case "firmwareRunning":
-				m = new(firmwareRunning)
+				m = new(FirmwareRunning)
 
 			case "biosVfCDNEnable":
 				m = new(biosVfCDNEnable)
@@ -5206,7 +5210,7 @@ func (s *configConfMos) UnmarshalXML(d *xml.Decoder, start xml.StartElement) err
 				m = new(biosVfIntelHyperThreadingTech)
 
 			case "computeRackUnit":
-				m = new(computeRackUnit)
+				m = new(ComputeRackUnit)
 
 			case "biosVfProcessorC3Report":
 				m = new(biosVfProcessorC3Report)
@@ -5284,7 +5288,7 @@ func (s *configConfMos) UnmarshalXML(d *xml.Decoder, start xml.StartElement) err
 			}
 		}
 	}
-	return nil
+	//return nil
 }
 
 // eventSubscribe is generated from an XSD element
@@ -5319,8 +5323,8 @@ type topSystem struct {
 	ChildAction string   `xml:"childAction,attr,omitempty"`
 }
 
-// computeRackUnit is generated from an XSD element
-type computeRackUnit struct {
+// ComputeRackUnit is generated from an XSD element
+type ComputeRackUnit struct {
 	XMLName             xml.Name `xml:"computeRackUnit"`
 	AdminPower          string   `xml:"adminPower,attr,omitempty"`
 	UsrLbl              string   `xml:"usrLbl,attr,omitempty"`
@@ -7082,7 +7086,7 @@ type adaptorCfgBackup struct {
 }
 
 // adaptorHostEthIf is generated from an XSD element
-type adaptorHostEthIf struct {
+type AdaptorHostEthIf struct {
 	XMLName        xml.Name `xml:"adaptorHostEthIf"`
 	Name           string   `xml:"name,attr,omitempty"`
 	Cdn            string   `xml:"cdn,attr,omitempty"`
@@ -7564,7 +7568,7 @@ type huuFirmwareUpdateCancel struct {
 }
 
 // huuFirmwareUpdater is generated from an XSD element
-type huuFirmwareUpdater struct {
+type HuuFirmwareUpdater struct {
 	XMLName         xml.Name `xml:"huuFirmwareUpdater"`
 	AdminState      string   `xml:"adminState,attr"`
 	RemoteIP        string   `xml:"remoteIp,attr,omitempty"`
@@ -7587,7 +7591,7 @@ type huuFirmwareUpdater struct {
 }
 
 // mgmtIf is generated from an XSD element
-type mgmtIf struct {
+type MgmtIf struct {
 	XMLName        xml.Name `xml:"mgmtIf"`
 	ExtIP          string   `xml:"extIp,attr,omitempty"`
 	ExtMask        string   `xml:"extMask,attr,omitempty"`
@@ -8489,8 +8493,8 @@ type firmwareBootDefinition struct {
 	Status      string   `xml:"status,attr,omitempty"`
 }
 
-// firmwareRunning is generated from an XSD element
-type firmwareRunning struct {
+// FirmwareRunning is generated from an XSD element
+type FirmwareRunning struct {
 	XMLName     xml.Name `xml:"firmwareRunning"`
 	Description string   `xml:"description,attr,omitempty"`
 	Deployment  string   `xml:"deployment,attr,omitempty"`
@@ -8681,8 +8685,8 @@ type topRoot struct {
 	Status      string   `xml:"status,attr,omitempty"`
 }
 
-// networkAdapterUnit is generated from an XSD element
-type networkAdapterUnit struct {
+// NetworkAdapterUnit is generated from an XSD element
+type NetworkAdapterUnit struct {
 	XMLName     xml.Name `xml:"networkAdapterUnit"`
 	Slot        string   `xml:"slot,attr,omitempty"`
 	Model       string   `xml:"model,attr,omitempty"`
@@ -8694,8 +8698,8 @@ type networkAdapterUnit struct {
 	ChildAction string   `xml:"childAction,attr,omitempty"`
 }
 
-// networkAdapterEthIf is generated from an XSD element
-type networkAdapterEthIf struct {
+// NetworkAdapterEthIf is generated from an XSD element
+type NetworkAdapterEthIf struct {
 	XMLName     xml.Name `xml:"networkAdapterEthIf"`
 	ID          uint     `xml:"id,attr,omitempty"`
 	Mac         string   `xml:"mac,attr,omitempty"`
@@ -8706,7 +8710,7 @@ type networkAdapterEthIf struct {
 }
 
 // faultInst is generated from an XSD element
-type faultInst struct {
+type FaultInst struct {
 	XMLName         xml.Name `xml:"faultInst"`
 	Ack             string   `xml:"ack,attr,omitempty"`
 	AffectedDN      string   `xml:"affectedDN,attr,omitempty"`
